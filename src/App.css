@@ -36,3 +36,65 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+}
+
+.city-card {
+  display: flex; 
+  width: 300px;
+  height: 150px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px; 
+  border-radius: 10px;
+  box-shadow: aliceblue 2px 6px;
+  margin: 10px;
+}
+
+.city-content {
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navbar {
+  display: flex;
+  background-color: teal;
+  color: white;
+}
+
+.navbar ul,li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+
+.navbar a:hover {
+  background-color: turquoise;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.navbar a:active {
+  background-color: turquoise;
+  border-radius: 6px;
+  font-weight: bold;
+}
