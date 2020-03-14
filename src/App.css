@@ -52,11 +52,10 @@ body {
 
 .city-card {
   display: flex; 
-  width: 300px;
+  width: 350px;
   height: 150px;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px; 
   border-radius: 10px;
   box-shadow: aliceblue 2px 6px;
   margin: 10px;
@@ -66,12 +65,21 @@ body {
   display: flex; 
   flex-direction: column;
   align-items: flex-start;
+  padding: 20px;
+}
+
+.city-card img {
+  width: 200px;
+  height: auto;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .navbar {
   display: flex;
   background-color: teal;
   color: white;
+  min-width: 600px;
 }
 
 .navbar ul,li {
