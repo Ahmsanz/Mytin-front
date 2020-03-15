@@ -1,24 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext'
+import {UserContext} from '../contexts/UserContext'
 
 const Login = () => {
+
+    const {isLoggedIn} = useContext(AuthContext);
+    
+
     const [mail, setMail] = useState("");
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("")  
+      
 
-
+    
     const handleMailChange = (e) => {
         e.preventDefault();
-        setMail(e.target.value);
-        console.log(mail);        
+        setMail(e.target.value);            
     }
 
     const handlePasswordChange = (e) => {
         e.preventDefault();
         setPassword(e.target.value);    
-        console.log(password);    
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         let body = {
@@ -26,7 +31,7 @@ const Login = () => {
             password: password
         }
 
-        axios({
+        await axios({
             method: 'post',
             url: 'http://localhost:4040/auth/login/',
             data: body,
@@ -35,10 +40,14 @@ const Login = () => {
             }
         })
         .then( res => {
-            console.log(res.status)
+            console.log(res);
             localStorage.clear();
-            localStorage.setItem('token', res.data.token);            
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('mail', res.data.mail)
+            setMail("");
+            setPassword("");            
         })
+        .then( () => setInterval( () => { window.location.href = '/cities'}, 1500))
         .catch( err => console.log(err))
 
 
@@ -46,11 +55,11 @@ const Login = () => {
 
 
     return ( 
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="name" value={mail} onChange={handleMailChange}/>
-                <input type="password" placeholder="password" value={password} onChange={handlePasswordChange}/>
-                <button>Log In, yo!</button>
+        <div className="list">
+            <form className="reg-form"onSubmit={handleSubmit}>
+                <input className = "form-field" type="text" placeholder="name" value={mail} onChange={handleMailChange}/>
+                <input className = "form-field" type="password" placeholder="password" value={password} onChange={handlePasswordChange}/>
+                <button className="submit-but">Log In, yo!</button>
             </form>
         </div>
      );

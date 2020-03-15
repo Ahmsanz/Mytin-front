@@ -77,6 +77,8 @@ body {
 
 .navbar {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   background-color: teal;
   color: white;
   min-width: 600px;
@@ -105,4 +107,90 @@ body {
   background-color: turquoise;
   border-radius: 6px;
   font-weight: bold;
+}
+
+.reg-form {
+  display: flex;
+  width: 75%;
+  border-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: turquoise 2px 6px;
+}
+
+.form-field {
+  width: 80%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px teal solid;
+  margin-top: 10px;
+}
+
+.form-field:focus {
+  border-bottom: 3px turquoise solid;
+}
+
+.submit-but {
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  margin: 20px 10px;
+  padding: 6px 10px;
+  border: none;
+}
+
+.submit-but:hover{
+  background-color: turquoise;
+  font-weight: bold;
+  box-shadow: dimgray 1px 4px;
+  cursor: pointer;
+}
+
+.user-status {
+  display: flex;
+  flex-direction: row;
+  border: solid turquoise 2px;
+  border-radius: 6px;
+  width: 200px;
+  height: 50px;
+  color: white;
+  padding: 5px;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+
+}
+
+.user-status img {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+.reg-but {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  padding: 10px;
+  background: teal;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 10px;
+
+}
+
+.reg-but a{
+  text-decoration: none;
+  color: white;  
+}
+
+.reg-but:hover {
+  background: turquoise;
+  box-shadow: lightgray 1px 3px;
 }

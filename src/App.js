@@ -6,19 +6,26 @@ import CitiesContextProvider from './contexts/CitiesContext';
 import UserContextProvider from './contexts/UserContext'
 import Home from './components/Home';
 import Login from './components/Login';
+import Register from './components/Register';
+import AuthContextProvider from './contexts/AuthContext';
+import Cities from './components/Cities';
 
 function App() {
   return (
     <BrowserRouter>
     <div className="App">  
       <UserContextProvider>
-      <Navbar />
-      <Switch> 
-        <CitiesContextProvider>
-          <Route exact path="/" component={Home} />
-          <Route path='/login' component={Login} />
-        </CitiesContextProvider>
-      </Switch>
+        <AuthContextProvider>
+        <Navbar />
+        <Switch> 
+          <CitiesContextProvider>
+            <Route exact path="/" component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route path='/cities' component={Cities} />
+          </CitiesContextProvider>
+        </Switch>
+        </AuthContextProvider>
       </UserContextProvider>
        
     </div>
