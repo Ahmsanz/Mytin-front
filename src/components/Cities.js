@@ -6,10 +6,10 @@ const Cities = () => {
 
     const {cities} = useContext(CitiesContext);
 
-    
+
     let citiesList = cities.length ? cities.map( city => {
         return (
-            
+            <a href={"/cities/" + city._id}>
             <div key={city._id} className='city-card'>
                 <img src={city.image} />
                 <div className = 'city-content'>
@@ -17,19 +17,20 @@ const Cities = () => {
                     <p>{city.country}</p>
                 </div>
             </div>
-            
+            </a>
+
         )
     }) : (
         <div>No cities to show yet.</div>
     );
 
-    return ( 
-    
+    return (
+
     <div className="list">
         {citiesList}
-    </div> 
-    
+    </div>
+
     );
 }
- 
+
 export default Cities;

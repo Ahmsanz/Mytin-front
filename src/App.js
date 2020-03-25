@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import AuthContextProvider from './contexts/AuthContext';
 import Cities from './components/Cities';
+import SingleCity from './components/SingleCity';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
-            <Route path='/cities' component={Cities} />
+            <Route exact path='/cities' component={Cities} />
+            <Route path='/cities/:id' component={SingleCity} />
           </CitiesContextProvider>
         </Switch>
         </AuthContextProvider>

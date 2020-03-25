@@ -8,19 +8,21 @@ const CitiesContextProvider = (props) => {
     const [cities, setCities] = useState([]);
 
     useEffect( () => {
-        axios.get('http://localhost:4040/cities/')
-        .then( res => {
-            setCities(res.data)
-        }
-        ).catch(err => console.log('oops, something went wrong with those cities', err))
-        
-    }, [])
+        getCities()
+    }, [cities])
 
-    return ( 
+    const getCities = async () => {
+      await axios.get('http://localhost:4040/cities/')
+      .then( res => {
+        setCities(res.data)
+      }).catch(err => console.log('oops, something went wrong with those cities', err))
+    }
+
+    return (
         <CitiesContext.Provider value={{cities}}>
             {props.children}
         </CitiesContext.Provider>
      );
 }
- 
+
 export default CitiesContextProvider;

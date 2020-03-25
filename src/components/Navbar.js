@@ -14,10 +14,10 @@ const Navbar = () => {
         if (isLoggedIn == true) {
             let loggedUser = users.filter( user => user.mail == localStorage.mail)
             setUser(loggedUser);
-        }                      
+        }
     }, [users])
 
-    
+
     const handleClick = (e) => {
         e.preventDefault();
         localStorage.clear();
@@ -26,21 +26,21 @@ const Navbar = () => {
             window.location.href = '/';
         }, 2200);
     }
-   
+
 
     const menu = user !== null ? (
-        <div className='navbar'> 
-            <div>           
-            <ul>                             
+        <div className='navbar'>
+            <div>
+            <ul>
                 <a href='/cities'><li>Cities</li></a>
                 <a href='/contact'><li>Contact</li></a>
                 <a style={{cursor: 'pointer'}} onClick={handleClick}><li>Log Out</li></a>
             </ul>
-            </div>        
-            <div className='user-status'>
+            </div>
+            <a id='user-status' href='#'>
                 <p>{user[0].first_name}</p>
                 <img src={user[0].picture}/>
-            </div>
+            </a>
         </div>
     ) : (
         <div className='navbar'>
@@ -51,7 +51,7 @@ const Navbar = () => {
                 <a href='/register'><li>Sign up</li></a>
             </ul>
         </div>
-         
+
     );
 
     const bye = logOut == true ? (
@@ -61,7 +61,7 @@ const Navbar = () => {
     ) : (
         <div></div>
     );
-    return ( 
+    return (
         <div>
             <div>
                 {menu}
@@ -72,5 +72,5 @@ const Navbar = () => {
         </div>
      );
 }
- 
+
 export default Navbar;
