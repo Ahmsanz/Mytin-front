@@ -9,7 +9,7 @@ const CitiesContextProvider = (props) => {
 
     useEffect( () => {
         getCities()
-    }, [cities])
+    }, [])
 
     const getCities = async () => {
       await axios.get('http://localhost:4040/cities/')

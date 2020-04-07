@@ -5,9 +5,9 @@ import {CitiesContext} from '../contexts/CitiesContext'
 const Cities = () => {
 
     const {cities} = useContext(CitiesContext);
-
-
+    
     let citiesList = cities.length ? cities.map( city => {
+        
         return (
             <a href={"/cities/" + city._id}>
             <div key={city._id} className='city-card'>
