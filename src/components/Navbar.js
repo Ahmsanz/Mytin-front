@@ -7,16 +7,9 @@ const Navbar = () => {
 
     const {isLoggedIn} = useContext(AuthContext);
     const {users} = useContext(UserContext);
-    const [user, setUser] = useState(null);
     const [logOut, setLogOut] = useState(false);
 
-    useEffect( () => {
-        if (isLoggedIn == true) {
-            let loggedUser = users.filter( user => user.mail == localStorage.mail)
-            setUser(loggedUser);
-        }
-    }, [users])
-
+    const loggedUser = isLoggedIn ? users.filter( user => user.mail == localStorage.mail) : undefined;
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -28,8 +21,9 @@ const Navbar = () => {
     }
 
 
-    const menu = user !== null ? (
-        <div className='navbar'>
+    const menu = loggedUser !== undefined ? loggedUser.map( user => {
+        return (
+            <div className='navbar'>
             <div>
             <ul>
                 <a href='/cities'><li>Cities</li></a>
@@ -38,10 +32,13 @@ const Navbar = () => {
             </ul>
             </div>
             <a id='user-status' href='#'>
-                <p>{user[0].first_name}</p>
-                <img src={user[0].picture}/>
+                <p>{user.first_name}</p>
+                <img src={user.picture}/>
             </a>
         </div>
+        )
+    }
+        
     ) : (
         <div className='navbar'>
             <ul>
