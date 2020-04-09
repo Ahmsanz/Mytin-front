@@ -9,7 +9,7 @@ const Cities = () => {
     let citiesList = cities.length ? cities.map( city => {
         
         return (
-            <a href={"/cities/" + city._id}>
+            <a href={"/cities/" + city._id + "&name=" + city.name}>
             <div key={city._id} className='city-card'>
                 <img src={city.image} />
                 <div className = 'city-content'>
