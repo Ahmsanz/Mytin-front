@@ -10,6 +10,7 @@ import Register from './components/Register';
 import AuthContextProvider from './contexts/AuthContext';
 import Cities from './components/Cities';
 import SingleCity from './components/SingleCity';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/register' component={Register} />
             <Route exact path='/cities' component={Cities} />
             <Route path='/cities/:id' component={SingleCity} />
+            <Route path='/profile' component={Profile} />
           </CitiesContextProvider>
         </Switch>
         </AuthContextProvider>

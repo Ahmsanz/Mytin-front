@@ -31,7 +31,7 @@ const Navbar = () => {
                 <a style={{cursor: 'pointer'}} onClick={handleClick}><li>Log Out</li></a>
             </ul>
             </div>
-            <a id='user-status' href='#'>
+            <a id='user-status' href='/profile'>
                 <p>{user.first_name}</p>
                 <img src={user.picture}/>
             </a>
