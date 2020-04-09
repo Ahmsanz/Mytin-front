@@ -7,13 +7,11 @@ const Home = () => {
 
     const {cities} = useContext(CitiesContext)
 
-    const [ citiesList, setCitiesList ] = useState([]);
+    const sample = cities.slice(0,4);
+    
 
-    useEffect( () => {
-        setCitiesList(cities.slice(0,4))
-    }, [citiesList])
 
-    let show = citiesList.length ? citiesList.map( city => {
+    let show = sample.length ? sample.map( city => {
         return (
             
             <div key={city._id} className='city-card'>
