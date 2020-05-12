@@ -41,6 +41,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+}
+
+h2, h3, h4 {
+  color: teal;
 }
 
 .list {
@@ -71,8 +76,10 @@ body {
 .city-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   padding: 20px;
+  text-align: right;
+  word-wrap: break-word;
 }
 
 .city-card img {
@@ -80,6 +87,7 @@ body {
   height: auto;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
+
 }
 
 .navbar {
@@ -89,13 +97,15 @@ body {
   align-items: center;
   background-color: teal;
   color: white;
-  min-width: 600px;
+  width: 100%;
+  min-width: 500px;
 }
 
 .navbar ul,li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navbar a {
@@ -105,10 +115,11 @@ body {
   padding: 5px;
 }
 
-.navbar a:hover {
+.navbar a:hover, .navbar a:active {
   background-color: turquoise;
   border-radius: 6px;
   font-weight: bold;
+  padding: 10px 5px;
 }
 
 .navbar a:active {
@@ -243,4 +254,9 @@ body {
   border-radius: 10px;
   top: -50px;
   left: -100px;
+}
+
+.itin-name:hover {
+  transform: scaleX(1.1);
+  /* color: red; */
 }

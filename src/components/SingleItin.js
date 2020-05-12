@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios'
 import {UserContext} from '../contexts/UserContext';
 import {FaHeart} from 'react-icons/fa'
+import {FaStar} from 'react-icons/fa'
 
 const SingleItinerary = (props) => {
 
@@ -121,15 +122,20 @@ const SingleItinerary = (props) => {
       })
     ) : (<p>No hashtags to show</p>)
       return (
-        <div style={{margin: '20px 0', borderRadius: '8px', boxShadow: 'rgb(1, 85, 77) 0 0 10px 0'}} key={itin._id}>
-          <div style={{backgroundImage: `url(${itin.image})`, backgroundSize: 'cover', width: '300px', heigth: '300px', padding: '20px 10px', color: 'whiteSmoke'}}>
-            <h3>{itin.name}</h3>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
-              <span>{itin.city}</span>
-              <span>{itin.rating} stars</span>
-            </div>
+        <div style={{margin: '20px 0', borderRadius: '8px', boxShadow: 'rgb(1, 85, 77) 0 0 10px 0', width: '80%'}} key={itin._id}>
+          <div style={{backgroundImage: `url(${itin.image})`, backgroundSize: 'cover', minHeight: '200px', padding: '20px 10px', color: 'whiteSmoke'}}>
           </div>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '10px'}}>
+            <h3>{itin.name}</h3>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', borderBottom: 'solid 1.5px teal', padding: '0 5px 20px 5px'}}>
+              <span>{itin.city}</span>
+              <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <span>{itin.rating}</span><FaStar style={{color: 'teal', marginLeft: '5px'}}/>
+              </div>
+            </div>
+          <div>
+
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '10px 30px'}}>
             <h4>Some practical information:</h4>
             <p>Duration: {itin.duration}h</p>
             <p>Price: {itin.price}€</p>
@@ -140,11 +146,11 @@ const SingleItinerary = (props) => {
                 <FaHeart style={{color: 'teal', cursor: 'pointer'}} onClick={removeFav}/>
               </div>
             ) : (
-              <button className='reg-but' onClick={addFav}>Fav!</button>
+              <button className='reg-but' onClick={addFav}>Love this!</button>
             )
           }
           </div>
-          <div style={{display: 'flex', flexDirection: 'row', margin: '20px 0', padding: '5px'}}>
+          <div style={{display: 'flex', flexDirection: 'row', margin: '0 0 20px 0', padding: '5px 30px'}}>
             {hashtags}
           </div>
         </div>
@@ -176,14 +182,14 @@ const SingleItinerary = (props) => {
       ) : (
         <div>Be the first to leave a comment</div>
       )}
-      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '300px', marginTop: '20px'}}>
+      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', marginTop: '20px'}}>
         <h3>Leave a comment!</h3>
         <div >
-          <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', left: '-30px'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} />
-          <span>{loggedUser[0] ? loggedUser[0].first_name : 'John Doe'}</span>
+          <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', right: '70%'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} />
+          <span style={{position: 'relative', right:'60%', top: '-8px'}}>{loggedUser[0] ? loggedUser[0].first_name : 'John Doe'}</span>
         </div>
-        <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}onSubmit={handleSubmit}>
-          <input style={{width: '250px', minHeight: '100px'}} type='text' onChange={handleComment} value={comment}/>
+        <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80%'}}onSubmit={handleSubmit}>
+          <textarea style={{width: '100%', minHeight: '100px', padding: '30px 20px 20px 20px'}} wrap='soft' type='text' onChange={handleComment} value={comment}/>
           <button className='reg-but' type='submit'>Comment</button>
         </form>
       </div>
