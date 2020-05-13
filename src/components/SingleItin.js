@@ -21,7 +21,7 @@ const SingleItinerary = (props) => {
 
   useEffect( () => {
     const getItin = async (id) => {
-      await axios.get(`${API_SERVER}/itineraries/itins/${id}`)
+      await axios.get(`${process.env.API_SERVER}/itineraries/itins/${id}`)
         .then( res => setItin(res.data) )
         .catch( err => console.log('something went wrong', err))
     };
@@ -30,7 +30,7 @@ const SingleItinerary = (props) => {
 
   useEffect( () => {
     const getComments = async (id) => {
-      await axios.get(`${API_SERVER}/itineraries/comments/${id}`)
+      await axios.get(`${process.env.API_SERVER}/itineraries/comments/${id}`)
       .then( res => {setCommentsList(res.data)})
       .catch( err => console.log(err))
     }
@@ -59,7 +59,7 @@ const SingleItinerary = (props) => {
           date
         }
         console.log('request body', body);
-        await axios(`${API_SERVER}/itineraries/comment`, {
+        await axios(`${process.env.API_SERVER}/itineraries/comment`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ const SingleItinerary = (props) => {
     let token = JSON.stringify(localStorage.token)
 
     if (id !== undefined) {
-      axios(`${API_SERVER}/users/favs/add/${userId}`, {
+      axios(`${process.env.API_SERVER}/users/favs/add/${userId}`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ const SingleItinerary = (props) => {
     let userId = loggedUser[0] ? loggedUser[0]._id : undefined;
     let token = JSON.stringify(localStorage.token)
 
-    axios(`${API_SERVER}/users/favs/remove/${userId}`, {
+    axios(`${process.env.API_SERVER}/users/favs/remove/${userId}`, {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',

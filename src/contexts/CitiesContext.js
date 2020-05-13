@@ -12,7 +12,7 @@ const CitiesContextProvider = (props) => {
     }, [])
 
     const getCities = async () => {
-      await axios.get(`${API_SERVER}/cities/`)
+      await axios.get(`${process.env.API_SERVER}/cities/`)
       .then( res => {
         setCities(res.data)
       }).catch(err => console.log('oops, something went wrong with those cities', err))
