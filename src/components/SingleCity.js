@@ -11,7 +11,7 @@ const SingleCity = (props) => {
     useEffect( () => {
         const getItins =  async () => {
 
-            await axios.get('http://localhost:4040/itineraries/city/' + name)
+            await axios.get(`${API_SERVER}/itineraries/city/${name}`)
             .then( res =>  setItineraries(res.data))
             .catch( err => console.log('oops, not hearing that city oright', err))
 

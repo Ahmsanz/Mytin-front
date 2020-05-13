@@ -9,7 +9,7 @@ const UserContextProvider = (props) => {
     const [users, setUsers] = useState([]);
 
     useEffect( () => {
-        axios.get('http://localhost:4040/users/')
+        axios.get(`${API_SERVER}/users/`)
         .then( res => setUsers(res.data))
         .catch( err => console.log('users not coming, sir', err))
     }, [])

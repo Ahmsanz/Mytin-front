@@ -33,7 +33,7 @@ const Login = () => {
 
         await axios({
             method: 'post',
-            url: 'http://localhost:4040/auth/login/',
+            url: `${API_SERVER}/auth/login/`,
             data: body,
             headers: {
                 'Content-Type': 'Application/json'
