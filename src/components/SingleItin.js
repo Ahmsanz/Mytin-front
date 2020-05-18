@@ -11,9 +11,9 @@ const SingleItinerary = (props) => {
   const [itin, setItin] = useState("");
   const [comment, setComment] = useState("");
   const [commentsList, setCommentsList] = useState([]);
-  const [ isFav, setIsFav ] = useState(false);
+  const [isFav, setIsFav] = useState(false);
   const [plans, setPlans] = useState([]);
-
+  
   const id = props.match.params.id.split('&')[0];
   const loggedUser = users ? users.filter( user => user.mail === localStorage.mail) : undefined;
   const favs = loggedUser[0] ? loggedUser[0].favourites : undefined;
@@ -69,7 +69,7 @@ const SingleItinerary = (props) => {
           userPic: loggedUser[0].picture,
           date
         }
-        console.log('request body', body);
+        
         await axios(`http://localhost:4040/itineraries/comment`, {
           method: 'post',
           headers: {
@@ -77,10 +77,11 @@ const SingleItinerary = (props) => {
           },
           data: body
         })
-        .then( res => {setComment('');})
-      } catch (err) { console.log('we did not get that comment', err)}
-
+        .then( res => {console.log(res.status); setComment("")})
+      } catch (err) { console.log('we did not get that comment', err)}   
+      setComment('')   
     }
+    
   }
 
 
@@ -100,6 +101,7 @@ const SingleItinerary = (props) => {
       .then( res => {favs.push(id); console.log(res.status)})
       .catch(err => console.log(err))
     }
+    setIsFav(true);
   }
 
   const removeFav = () => {
@@ -124,6 +126,7 @@ const SingleItinerary = (props) => {
     itin.map( itin => {
 
       let hashtags = itin.hashtags ? (
+        // eslint-disable-next-line array-callback-return
         itin.hashtags.split(',').map( (has, i) => {
           if (has.length) {
             return(
@@ -190,6 +193,7 @@ const SingleItinerary = (props) => {
     <div style={{display: 'flex', flexDirection:'column', alignItems:'center'}}>
       {shownItin}
       <h4>Comments on this:</h4>
+      <div style={{maxHeight: '600px', overflowY: 'scroll'}}>
       { commentsList.length ? (
         commentsList.map( com => {
           return (
@@ -208,6 +212,7 @@ const SingleItinerary = (props) => {
       ) : (
         <div>Be the first to leave a comment</div>
       )}
+      </div>
       <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', margin: '20px 0'}}>
         <h3>Leave a comment!</h3>
         <div >

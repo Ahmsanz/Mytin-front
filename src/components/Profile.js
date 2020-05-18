@@ -6,12 +6,13 @@ const Profile = () => {
     const {users} = useContext(UserContext);
     const [itins, setItins ] = useState([]);
     const [comments, setComments] = useState([])
+    
 
     const url = new URLSearchParams(window.location.href);    
     const mail = url.get('user')
     const token = url.get('token')
-    localStorage.setItem('token', token);
-    localStorage.setItem('mail', mail)
+    if (!localStorage.token && mail ) localStorage.setItem('token', token);
+    if (!localStorage.mail && token ) localStorage.setItem('mail', mail)
     
     const user = users.filter( user => user.mail === localStorage.mail || user.mail === mail)
 
@@ -28,7 +29,7 @@ const Profile = () => {
 
     useEffect( () => {
       const getComments = async (userId) => {
-        await axios.get(`http://localhost:4040sss/users/${userId}/comments/`)
+        await axios.get(`http://localhost:4040/users/${userId}/comments/`)
         .then( res => setComments(res.data))
         .catch( err => console.log('no comments', err))
       }
@@ -54,8 +55,8 @@ const Profile = () => {
                             <h3>{user.first_name}</h3>
                         </div>
                         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '60px'}}>
-                            <p>Complete name: {user.first_name + user.last_name}</p>
-                            <p>Age: {user.age} years</p>
+                            <p>Complete name: {user.first_name + ' ' + user.last_name}</p>
+                            <p>Age: {user.age ? user.age : 'many'} years</p>
                             <p>Email: {user.mail}</p>
                         </div>
                         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -96,7 +97,7 @@ const Profile = () => {
         })
 
         ) : (
-            <div>Come closer, let me take a look at your face.</div>
+            <div><p>Come closer, let me take a look at your face.</p></div>
         )
     )
 }
