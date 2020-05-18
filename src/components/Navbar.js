@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {UserContext} from '../contexts/UserContext';
 import {AuthContext} from '../contexts/AuthContext'
 import {FaGoogle} from 'react-icons/fa'
@@ -10,7 +10,7 @@ const Navbar = () => {
     const {users} = useContext(UserContext);
     const [logOut, setLogOut] = useState(false);
 
-    const loggedUser = isLoggedIn ? users.filter( user => user.mail == localStorage.mail) : undefined;
+    const loggedUser = isLoggedIn ? users.filter( user => user.mail === localStorage.mail) : undefined;
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -29,12 +29,12 @@ const Navbar = () => {
             <ul>
                 <a href='/cities'><li>Cities</li></a>
                 <a href='/contact'><li>Contact</li></a>
-                <a style={{cursor: 'pointer'}} onClick={handleClick}><li>Log Out</li></a>
+                <a style={{cursor: 'pointer'}} href='/' onClick={handleClick}><li>Log Out</li></a>
             </ul>
             </div>
             <a id='user-status' href='/profile'>
                 <p>{user.first_name}</p>
-                <img src={user.picture}/>
+                <img src={user.picture} alt='user'/>
             </a>
         </div>
         )
@@ -57,7 +57,7 @@ const Navbar = () => {
 
     );
 
-    const bye = logOut == true ? (
+    const bye = logOut === true ? (
         <div>
             <h3>Good bye, friend! Hope to see you again soon.</h3>
         </div>

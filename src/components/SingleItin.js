@@ -208,7 +208,7 @@ const SingleItinerary = (props) => {
       ) : (
         <div>Be the first to leave a comment</div>
       )}
-      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', marginTop: '20px'}}>
+      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', margin: '20px 0'}}>
         <h3>Leave a comment!</h3>
         <div >
           <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', right: '70%'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} alt='user' />

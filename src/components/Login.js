@@ -1,16 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {AuthContext} from '../contexts/AuthContext'
-import {UserContext} from '../contexts/UserContext'
+
 
 const Login = () => {
 
-    const {isLoggedIn} = useContext(AuthContext);
     
-
     const [mail, setMail] = useState("");
-    const [password, setPassword] = useState("")  
-      
+    const [password, setPassword] = useState("")        
 
     
     const handleMailChange = (e) => {

@@ -7,11 +7,15 @@ const Profile = () => {
     const [itins, setItins ] = useState([]);
     const [comments, setComments] = useState([])
 
-    const user = users.filter( user => user.mail == localStorage.mail)
+    const url = new URLSearchParams(window.location.href);    
+    const mail = url.get('user')
+    const token = url.get('token')
+    localStorage.setItem('token', token);
+    localStorage.setItem('mail', mail)
+    
+    const user = users.filter( user => user.mail === localStorage.mail || user.mail === mail)
 
-    const userFavs = user[0] !== undefined ? user[0].favourites : undefined
-
-    console.log(userFavs)
+    const userFavs = user[0] !== undefined ? user[0].favourites : undefined;
 
     useEffect( () => {
       const getItins = async () => {
@@ -32,12 +36,11 @@ const Profile = () => {
       if (user[0] !== undefined) {
         getComments(user[0]._id)
       }
-    }, [user[0]])
+    }, [user])
 
-    // const favs = user && user[0] !== undefined ? user[0].favourites : undefined
-    console.log(itins);
+    
     const favs = itins && userFavs !== undefined ? itins.filter( itin => userFavs.includes(itin._id)) : undefined
-    console.log(favs)
+    
     return (
         user ? (user.map( user => {
             return (

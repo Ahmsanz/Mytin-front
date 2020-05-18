@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/Navbar';
 import CitiesContextProvider from './contexts/CitiesContext';
@@ -33,7 +33,6 @@ function App() {
         </Switch>
         </AuthContextProvider>
       </UserContextProvider>
-
     </div>
     </BrowserRouter>
   );

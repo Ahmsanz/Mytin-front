@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Cities from './Cities';
+import React, { useContext } from 'react';
 import logo from '../media/MYtineraryLogo.png'
 import { CitiesContext } from '../contexts/CitiesContext';
 
@@ -15,7 +14,7 @@ const Home = () => {
         return (
 
             <div key={city._id} className='city-card'>
-                <img src={city.image} />
+                <img src={city.image} alt='' />
                 <div className = 'city-content'>
                     <h4>{city.name}</h4>
                     <p>{city.country}</p>
@@ -30,7 +29,7 @@ const Home = () => {
     return (
         <div>
             <h2> Welcome to Mytinerary</h2>
-            <img style={{maxWidth:'300px', heigth:'auto', margin: '30px 20px'}}src={logo} />
+            <img style={{maxWidth:'300px', heigth:'auto', margin: '30px 20px'}}src={logo} alt='' />
             <div className="reg-but" style={{margin: '0 auto'}}><a href='/register'><p>Sign Up!</p></a></div>
             <div className="list">
               {show}

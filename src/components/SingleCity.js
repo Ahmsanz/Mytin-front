@@ -17,14 +17,14 @@ const SingleCity = (props) => {
 
         }
         getItins();
-    }, [])
+    })
 
 
     const id = props.match.params.id.split('&')[0]
 
     const url = new URLSearchParams(window.location.href);
 
-    const city = cities.filter( city => city._id == id);
+    const city = cities.filter( city => city._id === id);
 
     const name = url.get('name');
 
