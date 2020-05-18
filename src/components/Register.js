@@ -46,7 +46,7 @@ const Register = () => {
             password: password
         }
         console.log(user);
-        Axios.post(`${process.env.API_SERVER}/users/register`, {data: user, headers: {'Content-Type': 'application/json'}})
+        Axios.post(`http://localhost:4040/users/register`, {data: user, headers: {'Content-Type': 'application/json'}})
         .then( res => console.log(res, 'User correctly registered'))
         .catch( err => console.log(err))
 

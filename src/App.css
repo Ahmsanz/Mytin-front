@@ -260,3 +260,24 @@ h2, h3, h4 {
   transform: scaleX(1.1);
   /* color: red; */
 }
+
+.google-but {
+  background: whitesmoke;
+  color: teal;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 6px; 
+  padding: 4px;
+  margin: 0 4px;
+}
+
+.google-but a {
+  color: teal;
+  text-decoration: none;
+}
+
+.google-but:hover {
+  background: turquoise;
+  font-weight: bold;
+}

@@ -12,33 +12,44 @@ const SingleItinerary = (props) => {
   const [comment, setComment] = useState("");
   const [commentsList, setCommentsList] = useState([]);
   const [ isFav, setIsFav ] = useState(false);
+  const [plans, setPlans] = useState([]);
 
   const id = props.match.params.id.split('&')[0];
-  const loggedUser = users ? users.filter( user => user.mail == localStorage.mail) : undefined;
+  const loggedUser = users ? users.filter( user => user.mail === localStorage.mail) : undefined;
   const favs = loggedUser[0] ? loggedUser[0].favourites : undefined;
 
-  console.log(loggedUser, favs)
+  
+  
 
   useEffect( () => {
     const getItin = async (id) => {
-      await axios.get(`${process.env.API_SERVER}/itineraries/itins/${id}`)
+      await axios.get(`http://localhost:4040/itineraries/itins/${id}`)
         .then( res => setItin(res.data) )
         .catch( err => console.log('something went wrong', err))
     };
     getItin(id);
-  }, [])
+  }, [id])
 
   useEffect( () => {
     const getComments = async (id) => {
-      await axios.get(`${process.env.API_SERVER}/itineraries/comments/${id}`)
+      await axios.get(`http://localhost:4040/itineraries/comments/${id}`)
       .then( res => {setCommentsList(res.data)})
       .catch( err => console.log(err))
     }
-    getComments(id)}, [])
+    getComments(id)}, [id])
 
   useEffect( () => {
     if (favs && favs.includes(id)) { setIsFav(true)}
-  })
+  }, [favs,id])
+
+  useEffect( () => {
+    const getPlans = async (id) => {      
+      await axios.get(`http://localhost:4040/plans/itinerary/${id}`)
+      .then( res => {console.log(res);setPlans(res.data)})
+      .catch( err => console.log('problems with the plans', err))
+    };
+    getPlans(id);
+  }, [id])
 
   const handleComment = (e) => {
     e.preventDefault();
@@ -59,7 +70,7 @@ const SingleItinerary = (props) => {
           date
         }
         console.log('request body', body);
-        await axios(`${process.env.API_SERVER}/itineraries/comment`, {
+        await axios(`http://localhost:4040/itineraries/comment`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -78,7 +89,7 @@ const SingleItinerary = (props) => {
     let token = JSON.stringify(localStorage.token)
 
     if (id !== undefined) {
-      axios(`${process.env.API_SERVER}/users/favs/add/${userId}`, {
+      axios(`http://localhost:4040/users/favs/add/${userId}`, {
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +106,7 @@ const SingleItinerary = (props) => {
     let userId = loggedUser[0] ? loggedUser[0]._id : undefined;
     let token = JSON.stringify(localStorage.token)
 
-    axios(`${process.env.API_SERVER}/users/favs/remove/${userId}`, {
+    axios(`http://localhost:4040/users/favs/remove/${userId}`, {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
@@ -140,6 +151,21 @@ const SingleItinerary = (props) => {
             <p>Duration: {itin.duration}h</p>
             <p>Price: {itin.price}€</p>
           </div>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <h4>Wanna join these plans??</h4>
+            { plans.length ? (
+              plans.map( plan => {
+                return (
+                  <div key={plan._id} style = {{marginBottom: '10px', paddingRight: '10px', width: '300px', height: '100px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: '6px', boxShadow: '0 0 6px 0 teal'}}>
+                    <img style={{width: '150px', height: '100px', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px'}} src={plan.img} alt='plan' />
+                    <span style={{textAlign: 'right'}}>{plan.title}</span>
+                  </div>
+                )
+              })
+            ) : (
+              <div>there are not plans described for this itinerary yet</div>
+            )}
+          </div>
           <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
             { isFav ? (
               <div>
@@ -167,10 +193,10 @@ const SingleItinerary = (props) => {
       { commentsList.length ? (
         commentsList.map( com => {
           return (
-            <div key={com._id} style={{borderBottom: '1px teal dashed', marginBottom: '20px'}}>
+            <div key={com._id} style={{borderBottom: '1px teal dashed', marginBottom: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
               <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '300px', padding: '20px 10px'}}>
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                  <img style={{width: '50px', height: '50px', borderRadius: '8px', marginRight: '20px'}} src={com.userPic}/>
+                  <img style={{width: '50px', height: '50px', borderRadius: '8px', marginRight: '20px'}} src={com.userPic} alt="user face"/>
                   <span>{com.userName}</span>
                 </div>
                 <p style={{wordWrap:'wrap', textAlign:'left'}}>{com.comment}</p>
@@ -185,7 +211,7 @@ const SingleItinerary = (props) => {
       <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', marginTop: '20px'}}>
         <h3>Leave a comment!</h3>
         <div >
-          <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', right: '70%'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} />
+          <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', right: '70%'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} alt='user' />
           <span style={{position: 'relative', right:'60%', top: '-8px'}}>{loggedUser[0] ? loggedUser[0].first_name : 'John Doe'}</span>
         </div>
         <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '80%'}}onSubmit={handleSubmit}>

@@ -15,7 +15,7 @@ const Profile = () => {
 
     useEffect( () => {
       const getItins = async () => {
-        await axios.get(`${process.env.API_SERVER}/itineraries/`)
+        await axios.get(`http://localhost:4040/itineraries/`)
         .then( res => {console.log(res); setItins(res.data)})
         .catch( err => console.log(err))
       }
@@ -24,7 +24,7 @@ const Profile = () => {
 
     useEffect( () => {
       const getComments = async (userId) => {
-        await axios.get(`${process.env.API_SERVER}sss/users/${userId}/comments/`)
+        await axios.get(`http://localhost:4040sss/users/${userId}/comments/`)
         .then( res => setComments(res.data))
         .catch( err => console.log('no comments', err))
       }

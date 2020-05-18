@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from '../contexts/UserContext';
 import {AuthContext} from '../contexts/AuthContext'
+import {FaGoogle} from 'react-icons/fa'
 
 
 const Navbar = () => {
@@ -47,6 +48,11 @@ const Navbar = () => {
                 <a href='/contact'><li>Contact</li></a>
                 <a href='/register'><li>Sign up</li></a>
             </ul>
+            <div className='google-but'>
+                <FaGoogle />
+                <a href='http://localhost:4040/auth/google'><span>Sign in with Google</span></a>
+            </div>
+            
         </div>
 
     );
