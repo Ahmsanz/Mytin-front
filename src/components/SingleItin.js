@@ -13,18 +13,18 @@ const SingleItinerary = (props) => {
   const [commentsList, setCommentsList] = useState([]);
   const [isFav, setIsFav] = useState(false);
   const [plans, setPlans] = useState([]);
+  const [nest, setNest] = useState("");
   
   const id = props.match.params.id.split('&')[0];
   const loggedUser = users ? users.filter( user => user.mail === localStorage.mail) : undefined;
   const favs = loggedUser[0] ? loggedUser[0].favourites : undefined;
-
-  
+    
   
 
   useEffect( () => {
     const getItin = async (id) => {
       await axios.get(`http://localhost:4040/itineraries/itins/${id}`)
-        .then( res => setItin(res.data) )
+        .then( res => {setItin(res.data); setNest(res.data[0].nest);} )
         .catch( err => console.log('something went wrong', err))
     };
     getItin(id);
@@ -43,23 +43,26 @@ const SingleItinerary = (props) => {
   }, [favs,id])
 
   useEffect( () => {
-    const getPlans = async (id) => {      
-      await axios.get(`http://localhost:4040/plans/itinerary/${id}`)
+    const getPlans = async (_nest) => {      
+      await axios.get(`http://localhost:4040/plans/itinerary/${_nest}`)
       .then( res => {console.log(res);setPlans(res.data)})
       .catch( err => console.log('problems with the plans', err))
     };
-    getPlans(id);
-  }, [id])
+    
+    if (nest) {
+      getPlans(nest);
+    }    
+  }, [nest])
 
   const handleComment = (e) => {
     e.preventDefault();
     setComment(e.target.value);
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (loggedUser) {
-      try {
+      
         let date = new Date().toDateString()
         let body = {
           userId: loggedUser[0]._id,
@@ -68,20 +71,19 @@ const SingleItinerary = (props) => {
           userName: loggedUser[0].first_name,
           userPic: loggedUser[0].picture,
           date
-        }
-        
-        await axios(`http://localhost:4040/itineraries/comment`, {
+        }        
+        setCommentsList([...commentsList, body]);
+        axios(`http://localhost:4040/itineraries/comment`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },
           data: body
         })
-        .then( res => {console.log(res.status); setComment("")})
-      } catch (err) { console.log('we did not get that comment', err)}   
-      setComment('')   
-    }
-    
+        .then( res => {console.log(res.status);  })        
+        .catch( err => console.log('we did not get that comment', err))        
+    }    
+    setComment("");
   }
 
 
