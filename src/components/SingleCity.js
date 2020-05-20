@@ -27,7 +27,7 @@ const SingleCity = (props) => {
 
         }
         getItins();
-    })
+    }, [])
 
     useEffect( () => {
         const getPlansByCity = async () => {
@@ -36,7 +36,7 @@ const SingleCity = (props) => {
             .catch( err => console.log('something wrong with the plans in this city', err))
         }
         getPlansByCity();
-    })
+    }, [])
     
 
     const itins = itineraries.length ? itineraries.map( itin => {
