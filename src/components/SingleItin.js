@@ -171,17 +171,17 @@ const SingleItinerary = (props) => {
               <div>there are not plans described for this itinerary yet</div>
             )}
           </div>
-          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', margin: '20px 0'}}>
             { isFav ? (
               <div>
                 <FaHeart style={{color: 'teal', cursor: 'pointer'}} onClick={removeFav}/>
               </div>
             ) : (
-              <button className='reg-but' onClick={addFav}>Love this!</button>
+              <button className='reg-but' onClick={addFav}><FaHeart style={{color: 'white'}}/>Love this!</button>
             )
           }
           </div>
-          <div style={{display: 'flex', flexDirection: 'row', margin: '0 0 20px 0', padding: '5px 30px'}}>
+          <div style={{display: 'flex', flexDirection: 'row', margin: '0 0 20px 0', padding: '5px 30px', justifyContent: 'center'}}>
             {hashtags}
           </div>
         </div>
@@ -192,7 +192,7 @@ const SingleItinerary = (props) => {
 
 
   return (
-    <div style={{display: 'flex', flexDirection:'column', alignItems:'center'}}>
+    <div style={{display: 'flex', flexDirection:'column', width: '100%', alignItems:'center'}}>
       {shownItin}
       <h4>Comments on this:</h4>
       <div style={{maxHeight: '600px', width: '85%', overflowY: 'scroll'}}>

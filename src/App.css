@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -41,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 
 }
 
@@ -100,7 +102,7 @@ h2, h3, h4 {
   background-color: teal;
   color: white;
   width: 100%;
-  min-width: 500px;
+  min-width: 400px;
 }
 
 .navbar ul,li {
@@ -284,18 +286,9 @@ h2, h3, h4 {
   font-weight: bold;
 }
 
-::-webkit-scrollbar {
-  display: block;
-  width: 10px;
-  
-}
-
-::-webkit-scrollbar-thumb {
-  color: teal;
-}
-
 #info-mail {
   color: teal;
+  font-family: Chulapa;
 }
 
 #info-mail:hover {
@@ -306,3 +299,35 @@ h2, h3, h4 {
 #info-mail:visited {
   color: teal;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track { 
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  
+  background-color: rgba(0, 128, 128, 0.6); 
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url('./fonts/DMMono-Regular.ttf');
+  
+  }
+
+@font-face {
+  font-family: 'Chulapa';
+  src: url('./fonts/Chulapa/Chulapa-Regular.otf')
+}
+
+::-webkit-input-placeholder {
+  color: teal; 
+  font-family: CustomFont;
+  
+}
+
