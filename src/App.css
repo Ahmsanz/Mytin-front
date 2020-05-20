@@ -67,7 +67,7 @@ h2, h3, h4 {
   width: 350px;
   height: 150px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between;  
   align-items: center;
   border-radius: 10px;
   box-shadow: rgb(1, 85, 77) 0 0 10px 0;
@@ -77,8 +77,9 @@ h2, h3, h4 {
 .city-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
   text-align: right;
   word-wrap: break-word;
 }

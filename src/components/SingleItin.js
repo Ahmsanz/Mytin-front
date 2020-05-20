@@ -138,7 +138,7 @@ const SingleItinerary = (props) => {
       })
     ) : (<p>No hashtags to show</p>)
       return (
-        <div style={{margin: '20px 0', borderRadius: '8px', boxShadow: 'rgb(1, 85, 77) 0 0 10px 0', width: '80%'}} key={itin._id}>
+        <div style={{margin: '20px 0', borderRadius: '8px', boxShadow: 'rgb(1, 85, 77) 0 0 10px 0', width: '90%'}} key={itin._id}>
           <div style={{backgroundImage: `url(${itin.image})`, backgroundSize: 'cover', minHeight: '200px', padding: '20px 10px', color: 'whiteSmoke'}}>
           </div>
             <h3>{itin.name}</h3>
@@ -195,7 +195,7 @@ const SingleItinerary = (props) => {
     <div style={{display: 'flex', flexDirection:'column', alignItems:'center'}}>
       {shownItin}
       <h4>Comments on this:</h4>
-      <div style={{maxHeight: '600px', overflowY: 'scroll'}}>
+      <div style={{maxHeight: '600px', width: '85%', overflowY: 'scroll'}}>
       { commentsList.length ? (
         commentsList.map( com => {
           return (
@@ -215,7 +215,7 @@ const SingleItinerary = (props) => {
         <div>Be the first to leave a comment</div>
       )}
       </div>
-      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '70%', margin: '20px 0'}}>
+      <div style={{display: 'flex', flexDirection:'column', alignItems:'center', border: 'teal 2px solid', borderRadius: '10px', padding: '20px', width: '80%', margin: '20px 0'}}>
         <h3>Leave a comment!</h3>
         <div >
           <img style = {{position: 'relative', width: '50px', height: '50px', borderRadius: '12px', top: '20px', right: '70%'}}src={loggedUser[0] ? loggedUser[0].picture : undefined} alt='user' />

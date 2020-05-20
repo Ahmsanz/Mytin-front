@@ -8,6 +8,16 @@ const SingleCity = (props) => {
 
     const [itineraries, setItineraries] = useState([])
 
+    const [plans, setPlans] = useState([]);
+
+    const id = props.match.params.id.split('&')[0]
+
+    const url = new URLSearchParams(window.location.href);
+
+    const city = cities.filter( city => city._id === id);
+
+    const name = url.get('name');
+
     useEffect( () => {
         const getItins =  async () => {
 
@@ -19,35 +29,58 @@ const SingleCity = (props) => {
         getItins();
     })
 
-
-    const id = props.match.params.id.split('&')[0]
-
-    const url = new URLSearchParams(window.location.href);
-
-    const city = cities.filter( city => city._id === id);
-
-    const name = url.get('name');
+    useEffect( () => {
+        const getPlansByCity = async () => {
+            await axios.get(`http://localhost:4040/plans/city/${name}`)
+            .then( res => setPlans(res.data))
+            .catch( err => console.log('something wrong with the plans in this city', err))
+        }
+        getPlansByCity();
+    })
+    
 
     const itins = itineraries.length ? itineraries.map( itin => {
         return (
-            <div key={itin._id}>
-                <a href={"../itineraries/" + itin._id} ><h4 className='itin-name'>{itin.name}</h4></a>
-            </div>
+            
+                <a href={"../itineraries/" + itin._id} style={{textDecoration: 'none'}}>
+                    <div key={itin._id} className='city-card' >
+                        <img src={itin.image} alt='' />
+                        <div className = 'city-content'>
+                            <h4>{itin.name}</h4>
+                        </div>
+                    </div>
+                </a>
+            
         )
-    }) : ( <div>No itineraries defined for this city</div>)
+    }) : ( <div style={{marginBottom: '20px'}}>No itineraries defined for this city</div>)
 
     const renderedCity = city ? ( city.map( city => {
         return (
-            <div>
-                <div key={city._id} className='city-card' style={{marginBottom: '30px'}}>
-                    <img src={city.image} />
-                    <div className = 'city-content'>
-                        <h4>{city.name}</h4>
-                        <p>{city.country}</p>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
+                <div style={{margin: '20px 0', borderRadius: '8px', boxShadow: 'rgb(1, 85, 77) 0 0 10px 0', width: '90%', maxWidth: '450px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <img style={{width: '100%', height: 'auto'}} src={city.image} alt="" />
+                    <h3>{city.name}</h3>
+                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', borderBottom: 'solid 1.5px teal', padding: '0 5px 20px 5px'}}>
+                        <span>{city.country}</span>                    
+                    </div>
+                    <div>
+                        <h4>Check these itineraries</h4>
+                    {itins}
                     </div>
                 </div>
                 <div>
-                   {itins}
+                    {plans.length ? (
+                        plans.map( plan => {
+                            return (
+                                <div key={plan._id} style = {{marginBottom: '10px', paddingRight: '10px', width: '300px', height: '100px', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: '6px', boxShadow: '0 0 6px 0 teal'}}>
+                                    <img style={{width: '150px', height: '100px', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px'}} src={plan.img} alt='plan' />
+                                    <span style={{textAlign: 'right'}}>{plan.title}</span>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <div>No plans in this city</div>
+                    )}
                 </div>
             </div>
         )
@@ -57,7 +90,7 @@ const SingleCity = (props) => {
     )
 
     return (
-        <div className = "list">
+        <div>
             {renderedCity}
         </div>
      );
