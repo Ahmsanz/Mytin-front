@@ -13,6 +13,7 @@ import SingleCity from './components/SingleCity';
 import SingleItinerary from './components/SingleItin';
 import Profile from './components/Profile';
 import Contact from './components/Contact';
+import Itineraries from './components/Itineraries';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/itineraries/:id' component={SingleItinerary} />
             <Route path='/profile' component={Profile} />
             <Route exact path='/contact' component={Contact}/>
+            <Route exact path= '/itineraries' component= {Itineraries}/>
           </CitiesContextProvider>
         </Switch>
         </AuthContextProvider>

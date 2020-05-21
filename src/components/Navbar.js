@@ -9,6 +9,7 @@ const Navbar = () => {
     const {isLoggedIn} = useContext(AuthContext);
     const {users} = useContext(UserContext);
     const [logOut, setLogOut] = useState(false);
+    const [showing, setShowing] = useState(false);
 
     const loggedUser = isLoggedIn ? users.filter( user => user.mail === localStorage.mail) : undefined;
 
@@ -26,11 +27,18 @@ const Navbar = () => {
         return (
             <div className='navbar'>
             <div>
-            <ul>
-                <a href='/cities'><li>Cities</li></a>
-                <a href='/contact'><li>Contact</li></a>
-                <a style={{cursor: 'pointer'}} href='/' onClick={handleClick}><li>Log Out</li></a>
-            </ul>
+                <ul>
+                    <li style={{display: 'flex', flexDirection: 'column'}} onMouseOver={ () => setShowing(true)} >Explore</li>
+                        <ul>
+                            <div style={ !showing ? {display: 'none'} : {display: 'flex', flexDirection: 'column'}} onMouseLeave = {() => setShowing(false)}>
+                                <a href='/cities'>Cities </a>
+                                <a href='/itineraries'>Itineraries </a>
+                            </div>
+                            
+                        </ul>
+                    <a href='/contact'><li>Contact</li></a>
+                    <a style={{cursor: 'pointer'}} href='/' onClick={handleClick}><li>Log Out</li></a>
+                </ul>
             </div>
             <a id='user-status' href='/profile'>
                 <p>{user.first_name}</p>
